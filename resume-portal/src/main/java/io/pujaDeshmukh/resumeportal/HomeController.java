@@ -2,7 +2,10 @@ package io.pujaDeshmukh.resumeportal;
 
 import io.pujaDeshmukh.resumeportal.models.MyUserDetails;
 import io.pujaDeshmukh.resumeportal.models.USERINFO;
+import io.pujaDeshmukh.resumeportal.models.UserProfile;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    UserProfileRepository userProfileRepository;
     @GetMapping("/")
     public String home(HttpServletRequest req){
         HttpSession session = req.getSession();
@@ -28,7 +35,13 @@ public class HomeController {
 
     @GetMapping("/view/{userId}")
     public String userView(@PathVariable String userId, Model model){
+       Optional<UserProfile> userProfileOptional =  userProfileRepository.findByUserName(userId);
+        userProfileOptional.orElseThrow(() -> new RuntimeException("Not found : "+userId));
+
        model.addAttribute("userId",userId);
-        return "profile-templates/2/index";
+       UserProfile userProfile = userProfileOptional.get();
+       model.addAttribute("userProfile",userProfile);
+
+        return "profile-templates/" + userProfile.getId()+"/index";
     }
 }

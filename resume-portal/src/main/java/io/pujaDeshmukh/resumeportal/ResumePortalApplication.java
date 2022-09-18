@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories
-@ComponentScan(basePackages = {"io.pujaDeshmukh.resumeportal"})
+//@ComponentScan(basePackages = {"io.pujaDeshmukh.resumeportal"})
 public class ResumePortalApplication {
 
 	public static void main(String[] args) {
