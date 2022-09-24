@@ -1,6 +1,6 @@
 insert into USERINFO (id, username, password, active, roles) values
-(1, 'einstein', 'einstein', true, 'USER'),
-(2, 'newton', 'newton', true, 'USER'),
+(1, 'Albert', 'Albert', true, 'USER'),
+(2, 'Issac', 'Issac', true, 'USER'),
 (3, 'koushik', 'koushik', true, 'USER');
 
 insert into user_profile (id, user_name, theme, summary,first_name, last_name, designation,email) values

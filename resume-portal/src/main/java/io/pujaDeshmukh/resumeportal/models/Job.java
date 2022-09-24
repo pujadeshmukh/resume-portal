@@ -2,6 +2,7 @@ package io.pujaDeshmukh.resumeportal.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table
@@ -14,6 +15,15 @@ public class Job {
     private LocalDate startDate;
     private LocalDate endDate;
 
+   /* public List<String> getResponsibilities() {
+        return responsibilities;
+    }
+
+    public void setResponsibilities(List<String> responsibilities) {
+        this.responsibilities = responsibilities;
+    }
+
+    private List<String> responsibilities;*/
     public int getId() {
         return id;
     }
