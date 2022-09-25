@@ -3,8 +3,8 @@ package io.pujaDeshmukh.resumeportal.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USERINFO")
-public class USERINFO {
+@Table(name = "UserInfo")
+public class UserInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,7 +13,6 @@ public class USERINFO {
     private String password;
     private boolean active;
     private String roles;
-
 
     public int getId() {
         return id;

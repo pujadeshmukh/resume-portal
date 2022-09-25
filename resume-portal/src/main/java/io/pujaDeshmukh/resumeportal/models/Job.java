@@ -1,7 +1,11 @@
 package io.pujaDeshmukh.resumeportal.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,10 +16,15 @@ public class Job {
     private int id;
     private String company;
     private String designation;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
+    private boolean isCurrentJob;
+    @ElementCollection(targetClass=String.class)
+    private List<String> responsibilities = new ArrayList();
 
-   /* public List<String> getResponsibilities() {
+    public List<String> getResponsibilities() {
         return responsibilities;
     }
 
@@ -23,7 +32,25 @@ public class Job {
         this.responsibilities = responsibilities;
     }
 
-    private List<String> responsibilities;*/
+    public boolean isCurrentJob() {
+        return isCurrentJob;
+    }
+
+    public void setCurrentJob(boolean currentJob) {
+        isCurrentJob = currentJob;
+    }
+
+    @Override
+    public String toString() {
+        return "Job{" +
+                "id=" + id +
+                ", company='" + company + '\'' +
+                ", designation='" + designation + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
@@ -64,14 +91,11 @@ public class Job {
         this.endDate = endDate;
     }
 
-    @Override
-    public String toString() {
-        return "Job{" +
-                "id=" + id +
-                ", company='" + company + '\'' +
-                ", designation='" + designation + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
+    public String getFormattedStartDate() {
+        return startDate.format(DateTimeFormatter.ofPattern("MMM yyyy"));
+    }
+
+    public String getFormattedEndDate() {
+        return endDate.format(DateTimeFormatter.ofPattern("MMM yyyy"));
     }
 }

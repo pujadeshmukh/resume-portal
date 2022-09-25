@@ -10,11 +10,67 @@ public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    private String userName;
     private int theme;
     private String summary;
-    private String designation;
     private String firstName;
     private String lastName;
+    private String email;
+    private String phone;
+    private String designation;
+
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JoinColumn(name = "id")
+    List<Job> jobs = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JoinColumn(name = "id")
+    List<Education> educations = new ArrayList<>();
+
+    @ElementCollection(targetClass=String.class)
+    List<String> skills = new ArrayList<>();
+
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
+    }
+
+    public List<Education> getEducations() {
+        return educations;
+    }
+
+    public void setEducations(List<Education> educations) {
+        this.educations = educations;
+    }
+
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getEmail() {
         return email;
@@ -24,12 +80,21 @@ public class UserProfile {
         this.email = email;
     }
 
-    private String email;
+    public String getPhone() {
+        return phone;
+    }
 
-    @OneToMany(cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    @JoinColumn(name = "job_id")
-    List<Job> jobs = new ArrayList<>();
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
 
     public String getUserName() {
         return userName;
@@ -38,8 +103,6 @@ public class UserProfile {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
-    private String userName;
 
     public int getId() {
         return id;
@@ -63,37 +126,5 @@ public class UserProfile {
 
     public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public List<Job> getJobs() {
-        return jobs;
-    }
-
-    public void setJobs(List<Job> jobs) {
-        this.jobs = jobs;
     }
 }
